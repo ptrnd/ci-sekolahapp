@@ -10,7 +10,9 @@ class GuruController extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		//Do your magic here
+		$this->load->model('mahasiswa_model');
+		$this->load->helper('url', 'form');
+		$this->load->library('form_validation');
 	}
 
 
