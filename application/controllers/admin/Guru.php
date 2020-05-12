@@ -3,7 +3,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class GuruController extends CI_Controller
+class Guru extends CI_Controller
 {
 
 	public function __construct()
@@ -19,8 +19,26 @@ class GuruController extends CI_Controller
 		$data['title'] = 'Data Guru';
 		$data['guru'] = $this->guru->getGuru();
 		$this->load->view('template/header', $data);
+		$this->load->view('admin/guru/index', $data);
 		$this->load->view('template/footer');
+	}
+
+	public function tambah()
+	{
+		$data['title'] = 'Data Guru';
+		$this->form_validation->set_rules('nama', 'Nama', 'required');
+		$this->form_validation->set_rules('nip', 'Nim', 'required|numeric');
+		$this->form_validation->set_rules('alamat', 'Alamat', 'required');
+		$this->form_validation->set_rules('telp', 'No. HP', 'required|numeric');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('template/header', $data);
+			$this->load->view('admin/guru/tambah', $data);
+			$this->load->view('template/footer');
+		} else {
+		}
 	}
 }
 
-/* End of file GuruController.php */
+/* End of file Guru.php */
