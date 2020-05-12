@@ -46,11 +46,17 @@ class guru_model extends CI_Model
 			"nama" => $this->input->post('nama', true),
 			"nip" => $this->input->post('nip', true),
 			"alamat" => $this->input->post('alamat', true),
-			"telp" => $this->input->post('email', true),
+			"telp" => $this->input->post('telp', true),
 			"email" => $this->input->post('email', true)
 		];
 		$this->db->where('id', $this->input->post('id'));
 		$this->db->update('guru', $data);
+	}
+
+	public function hapusGuru($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('guru');
 	}
 
 	// bagian API

@@ -6,6 +6,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class mapel_model extends CI_Model
 {
 
+	public function getAll()
+	{
+		$this->db->select('
+			m.id AS id_mapel,
+			m.nama_mapel AS nama_mapel,
+			m.guru_id AS id_guru,
+			g.nama AS nama_guru');
+		$this->db->from('mapel AS m');
+		$this->db->join('guru AS g', 'g.id = m.guru_id');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
 	public function getMapel()
 	{
 		$query = $this->db->get('mapel');
@@ -82,7 +95,7 @@ class mapel_model extends CI_Model
 	{
 		$data = [
 			"nama_mapel" => $this->input->post('nama_mapel', true),
-			"guru_id" => $this->input->post('guru_id', true),
+			"guru_id" => $this->input->post('guru', true),
 		];
 		$this->db->insert('mapel', $data);
 	}
@@ -91,10 +104,16 @@ class mapel_model extends CI_Model
 	{
 		$data = [
 			"nama_mapel" => $this->input->post('nama_mapel', true),
-			"guru_id" => $this->input->post('guru_id', true),
+			"guru_id" => $this->input->post('guru', true),
 		];
 		$this->db->where('id', $this->input->post('id'));
 		$this->db->update('mapel', $data);
+	}
+
+	public function hapusMapel($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('mapel');
 	}
 
 	// bagian API

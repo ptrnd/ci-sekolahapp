@@ -5,10 +5,41 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class jadwal_model extends CI_Model
 {
+	public function getAll()
+	{
+		// SELECT 
+		// 	j.id AS id_jadwal, 
+		// 	j.jam_ke AS jam_ke, 
+		// 	j.jumlah_jam AS jumlah_jam, 
+		// 	m.nama_mapel AS nama_mapel, 
+		// 	k.nama_kelas AS nama_kelas 
+		// FROM jadwal AS j 
+		// JOIN mapel AS m ON m.id = j.mapel_id 
+		// JOIN kelas AS k ON k.id = j.kelas_id
+
+		$this->db->select('
+			j.id AS id_jadwal, 
+			j.jam_ke AS jam_ke, 
+			j.jumlah_jam AS jumlah_jam,
+			j.hari AS hari, 
+			m.nama_mapel AS nama_mapel, 
+			k.nama_kelas AS nama_kelas');
+		$this->db->from('jadwal AS j');
+		$this->db->join('mapel AS m', 'm.id = j.mapel_id');
+		$this->db->join('kelas AS k', 'k.id = j.kelas_id');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 
 	public function getJadwal()
 	{
 		$query = $this->db->get('jadwal');
+		return $query->result_array();
+	}
+
+	public function getKelas()
+	{
+		$query = $this->db->get('kelas');
 		return $query->result_array();
 	}
 
@@ -107,6 +138,7 @@ class jadwal_model extends CI_Model
 		$this->db->select('jadwal.id AS id_jadwal,
 							jadwal.jam_ke AS jam_ke,
 							jadwal.jumlah_jam AS jumlah_jam,
+							jadwal.hari AS hari,
 							kelas.id AS id_kelas,
 							kelas.nama_kelas AS nama_kelas,
     						kelas.jurusan AS jurusan,
@@ -125,8 +157,8 @@ class jadwal_model extends CI_Model
 	public function tambahJadwal()
 	{
 		$data = [
-			"mapel_id" => $this->input->post('mapel_id', true),
-			"kelas_id" => $this->input->post('kelas_id', true),
+			"mapel_id" => $this->input->post('mapel', true),
+			"kelas_id" => $this->input->post('kelas', true),
 			"hari" => $this->input->post('hari', true),
 			"jam_ke" => $this->input->post('jam_ke', true),
 			"jumlah_jam" => $this->input->post('jumlah_jam', true)
@@ -138,8 +170,8 @@ class jadwal_model extends CI_Model
 	public function editJadwal()
 	{
 		$data = [
-			"mapel_id" => $this->input->post('mapel_id', true),
-			"kelas_id" => $this->input->post('kelas_id', true),
+			"mapel_id" => $this->input->post('mapel', true),
+			"kelas_id" => $this->input->post('kelas', true),
 			"hari" => $this->input->post('hari', true),
 			"jam_ke" => $this->input->post('jam_ke', true),
 			"jumlah_jam" => $this->input->post('jumlah_jam', true)
@@ -147,7 +179,11 @@ class jadwal_model extends CI_Model
 		$this->db->where('id', $this->input->post('id'));
 		$this->db->update('jadwal', $data);
 	}
-
+	public function hapusJadwal($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('jadwal');
+	}
 	// bagian API
 
 	public function getJadwalAPI($id = null)

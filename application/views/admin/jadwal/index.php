@@ -2,7 +2,7 @@
 <div class="row mt-4">
     <div class="col-md-6">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Data guru<strong> berhasil </strong> <?= $this->session->flashdata('flash-data'); ?>
+            Data Jadwal<strong> berhasil </strong> <?= $this->session->flashdata('flash-data'); ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -14,7 +14,7 @@
     <div class="card-header">
         <h3 class="card-title">
             <i class="fas fa-chart-pie mr-1"></i>
-            Data Guru
+            Data Jadwal
         </h3>
     </div><!-- /.card-header -->
     <div class="card-body p-0">
@@ -22,31 +22,33 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Nama</th>
-                    <th>NIP</th>
-                    <th>Alamat</th>
-                    <th>No. HP</th>
-                    <th>Email</th>
+                    <th>Hari</th>
+                    <th>Nama Mata Pelajaran</th>
+                    <th>Kelas</th>
+                    <th>Jam Ke</th>
+                    <th>Jumlah Jam</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
 				$a = 1;
-				foreach ($guru as $gr) :
+				foreach ($jadwal as $jdw) :
 				?>
                 <tr>
                     <td><?= $a++ ?></td>
-                    <td><?= $gr['nama'] ?></td>
-                    <td><?= $gr['nip'] ?></td>
-                    <td><?= $gr['alamat'] ?></td>
-                    <td><?= $gr['telp'] ?></td>
-                    <td><?= $gr['email'] ?></td>
+                    <td><?= $jdw['hari'] ?></td>
+                    <td><?= $jdw['nama_mapel'] ?></td>
+                    <td><?= $jdw['nama_kelas'] ?></td>
+                    <td><?= $jdw['jam_ke'] ?></td>
+                    <td><?= $jdw['jumlah_jam'] ?></td>
                     <td>
-                        <a href="<?= base_url() ?>admin/guru/edit/<?= $gr['id'] ?>" class="btn btn-warning btn-sm">
+                        <a href="<?= base_url() ?>admin/jadwal/edit/<?= $jdw['id_jadwal'] ?>"
+                            class="btn btn-warning btn-sm">
                             <i class="fa fa-edit"></i> Edit
                         </a>
-                        <a href="<?= base_url() ?>admin/guru/hapus/<?= $gr['id'] ?>" class="btn btn-danger btn-sm">
+                        <a href="<?= base_url() ?>admin/jadwal/hapus/<?= $jdw['id_jadwal'] ?>"
+                            class="btn btn-danger btn-sm">
                             <i class="fa fa-trash"></i> Hapus
                         </a>
                     </td>
@@ -56,4 +58,4 @@
         </table>
     </div><!-- /.card-body -->
 </div>
-<a href="<?= base_url() ?>admin/guru/tambah" class="btn btn-primary float-right">Tambah</a>
+<a href="<?= base_url() ?>admin/jadwal/tambah" class="btn btn-primary float-right">Tambah</a>
