@@ -7,14 +7,14 @@ class login_model extends CI_Model
 
 	function login($username)
 	{
-		$this->db->select('username, password');
-		$this->db->from('user');
-		$this->db->where('username', $username);
+		$this->db->select('email, password');
+		$this->db->from('users');
+		$this->db->where('email', $username);
 		$this->db->limit(1);
 		$query = $this->db->get();
 
 		if ($query->num_rows() == 1) {
-			return $query->result();
+			return $query->result_array();
 		} else {
 			return false;
 		}

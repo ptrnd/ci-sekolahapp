@@ -24,13 +24,16 @@ class Login extends CI_Controller
 	public function proses_login()
 	{
 		$username = htmlspecialchars($this->input->post('user'));
-		$passwordhash = password_hash($this->input->post('pass'), PASSWORD_DEFAULT);
+		// $passwordhash = password_hash($this->input->post('pass'), PASSWORD_DEFAULT);
 
 		$ceklogin = $this->login->login($username);
+		foreach ($ceklogin as $row);
 
-		if ($ceklogin && password_verify($this->input->post('pass'), $passwordhash)) {
-			// echo "ke if ceklogin";
-			foreach ($ceklogin as $row);
+		if (
+			$ceklogin
+			&& password_verify($this->input->post('pass'), $row['password'])
+		) {
+			// // echo "ke if ceklogin";
 			$this->session->set_userdata('user', $row->username);
 			// $this->session->set_userdata('level', $row->level);
 			redirect('admin/guru/index');
@@ -41,7 +44,7 @@ class Login extends CI_Controller
 			$this->load->view('template/header_login', $data);
 			$this->load->view('login/index', $data);
 			$this->load->view('template/footer_login');
-			// redirect('login/index','refresh');
+			// redirect('login/index', 'refresh');
 		}
 	}
 
