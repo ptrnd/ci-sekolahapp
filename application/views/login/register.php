@@ -23,11 +23,11 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="text" name="user" class="form-control" placeholder="Username"
-                        value="<?php echo set_value('user'); ?>">
+                    <input type="email" name="email" class="form-control" placeholder="Email"
+                        value="<?php echo set_value('email'); ?>">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-user"></span>
+                            <span class="fas fa-envelope"></span>
                         </div>
                     </div>
                 </div>
@@ -75,6 +75,9 @@
 
 
         </div>
+
+
+
 
         <!-- /.login-card-body -->
     </div>

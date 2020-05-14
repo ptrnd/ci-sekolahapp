@@ -66,16 +66,17 @@
                         <i class="far fa-user"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">Putranda Bagus</span>
+                        <span
+                            class="dropdown-item dropdown-header"><?php echo $this->session->userdata('nama') ?></span>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Profil
-                        </a>
-                        <a href="#" class="dropdown-item">
+                        <!-- <a href="#" class="dropdown-item">
                             <i class="fas fa-users mr-2"></i> Pengaturan
-                        </a>
+                        </a> -->
+                        <h6 class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i> <?php echo $this->session->userdata('email') ?>
+                        </h6>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a href="<?= base_url() ?>login/logout" class="dropdown-item">
                             <i class="fas fa-file mr-2"></i> Logout
                         </a>
                         <div class="dropdown-divider"></div>
@@ -110,12 +111,6 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?= base_url() ?>admin/dashboard" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard</p>
-                                    </a>
-                                </li>
                                 <li class="nav-item">
                                     <a href="<?= base_url() ?>admin/guru" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
@@ -157,6 +152,14 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
+
+
+
+
+
+
+
+
 
             <section class="content">
                 <div class="container-fluid">

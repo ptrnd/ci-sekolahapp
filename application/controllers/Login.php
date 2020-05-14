@@ -10,7 +10,7 @@ class Login extends CI_Controller
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('login_model', 'login');
-		$this->load->library('form_validation');
+		$this->load->library('form_validation', 'session');
 	}
 
 	public function index()
@@ -23,22 +23,21 @@ class Login extends CI_Controller
 
 	public function proses_login()
 	{
-		$username = htmlspecialchars($this->input->post('user'));
+		$email = htmlspecialchars($this->input->post('email'));
 		// $passwordhash = password_hash($this->input->post('pass'), PASSWORD_DEFAULT);
 
-		$ceklogin = $this->login->login($username);
+		$ceklogin = $this->login->login($email);
 		foreach ($ceklogin as $row);
-
 		if (
 			$ceklogin
 			&& password_verify($this->input->post('pass'), $row['password'])
 		) {
 			// // echo "ke if ceklogin";
-			$this->session->set_userdata('user', $row->username);
-			// $this->session->set_userdata('level', $row->level);
+			$this->session->set_userdata('nama', $row->nama);
+			$this->session->set_userdata('email', $row->email);
 			redirect('admin/guru/index');
 		} else {
-			$data['pesan'] = "username dan/atau password anda salah. :(";
+			$data['pesan'] = "email dan/atau password anda salah. :(";
 
 			$data['title'] = 'Login';
 			$this->load->view('template/header_login', $data);
@@ -65,7 +64,7 @@ class Login extends CI_Controller
 	public function proses_reg()
 	{
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
-		$this->form_validation->set_rules('user', 'Username', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
 		$this->form_validation->set_rules('pass', 'Password', 'required');
 		$this->form_validation->set_rules('pass2', 'Confirm Password', 'required|matches[pass]');
 

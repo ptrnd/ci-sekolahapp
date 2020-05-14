@@ -12,7 +12,7 @@ class Jadwal extends CI_Controller
 		$this->load->model('jadwal_model', 'jadwal');
 		$this->load->model('mapel_model', 'mapel');
 		$this->load->helper('url', 'form');
-		$this->load->library('form_validation');
+		$this->load->library('form_validation', 'session');
 	}
 
 	public function index()

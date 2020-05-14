@@ -5,11 +5,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class login_model extends CI_Model
 {
 
-	function login($username)
+	function login($email)
 	{
-		$this->db->select('email, password');
+		$this->db->select('nama, email, password');
 		$this->db->from('users');
-		$this->db->where('email', $username);
+		$this->db->where('email', $email);
 		$this->db->limit(1);
 		$query = $this->db->get();
 
@@ -26,10 +26,10 @@ class login_model extends CI_Model
 
 		$data = [
 			"nama" => $this->input->post('nama', true),
-			"username" => $this->input->post('user', true),
+			"email" => $this->input->post('email', true),
 			"password" => $password,
 		];
-		$this->db->insert('user', $data);
+		$this->db->insert('users', $data);
 	}
 }
 

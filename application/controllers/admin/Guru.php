@@ -11,7 +11,7 @@ class Guru extends CI_Controller
 		parent::__construct();
 		$this->load->model('guru_model', 'guru');
 		$this->load->helper('url', 'form');
-		$this->load->library('form_validation');
+		$this->load->library('form_validation', 'session');
 	}
 
 	public function index()
