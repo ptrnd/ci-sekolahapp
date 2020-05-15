@@ -27,17 +27,32 @@ class Login extends CI_Controller
 		// $passwordhash = password_hash($this->input->post('pass'), PASSWORD_DEFAULT);
 
 		$ceklogin = $this->login->login($email);
-		foreach ($ceklogin as $row);
-		if (
-			$ceklogin
-			&& password_verify($this->input->post('pass'), $row['password'])
-		) {
-			// // echo "ke if ceklogin";
-			$this->session->set_userdata('nama', $row['nama']);
-			$this->session->set_userdata('email', $row['email']);
-			redirect('admin/guru/index');
+
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('pass', 'Password', 'required');
+
+		if ($this->form_validation->run() == TRUE) {
+			foreach ((array) $ceklogin as $row) :
+				if (
+					$ceklogin
+					&& password_verify($this->input->post('pass'), $row['password'])
+				) {
+					// // echo "ke if ceklogin";
+					$this->session->set_userdata('nama', $row['nama']);
+					$this->session->set_userdata('email', $row['email']);
+					redirect('admin/guru/index');
+				} else {
+					$data['pesan'] = "email dan/atau password anda salah. :(";
+
+					$data['title'] = 'Login';
+					$this->load->view('template/header_login', $data);
+					$this->load->view('login/index', $data);
+					$this->load->view('template/footer_login');
+					// redirect('login/index', 'refresh');
+				}
+			endforeach;
 		} else {
-			$data['pesan'] = "email dan/atau password anda salah. :(";
+			$data['pesan'] = "email dan/atau password belum diisi.";
 
 			$data['title'] = 'Login';
 			$this->load->view('template/header_login', $data);
