@@ -18,6 +18,9 @@ class Guru extends CI_Controller
 	{
 		$data['title'] = 'Data Guru';
 		$data['guru'] = $this->guru->getGuru();
+		if ($this->input->post('key')) {
+			$data['guru'] = $this->guru->cariGuru();
+		}
 		$this->load->view('template/header', $data);
 		$this->load->view('admin/guru/index', $data);
 		$this->load->view('template/footer');

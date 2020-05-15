@@ -17,7 +17,7 @@ class guru_model extends CI_Model
 		return $this->db->get_where('guru', ['id' => $id])->row_array();
 	}
 
-	public function cariDataGuru()
+	public function cariGuru()
 	{
 		$key = $this->input->post('key');
 		$this->db->like('nama', $key);

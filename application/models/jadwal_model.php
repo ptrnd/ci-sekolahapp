@@ -106,7 +106,7 @@ class jadwal_model extends CI_Model
 		return $query->row_array();
 	}
 
-	public function cariDataJadwal()
+	public function cariDataAll()
 	{
 		// mencari semua data termasuk kelas dan mapelnya.
 		// query biasa ditunjukkan seperti dibawah
@@ -149,6 +149,7 @@ class jadwal_model extends CI_Model
 			->join('kelas', 'kelas.id = jadwal.kelas_id')
 			->like('jam_ke', $key)
 			->or_like('jumlah_jam', $key)
+			->or_like('hari', $key)
 			->or_like('nama_mapel', $key)
 			->or_like('nama_kelas', $key);
 		return $this->db->get()->result_array();

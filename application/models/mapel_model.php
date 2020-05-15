@@ -79,15 +79,13 @@ class mapel_model extends CI_Model
 		// return $query->result_array();
 
 		$key = $this->input->post('key');
-		$this->db->select('mapel.id AS id, 
-                            mapel.nama_mapel AS nama_mapel,
-                            mapel.guru_id AS guru_id,
-                            guru.nama AS nama_guru')
+		$this->db->select('mapel.id AS id_mapel,
+						   mapel.nama_mapel AS nama_mapel,
+                           guru.nama AS nama_guru')
 			->from('mapel')
 			->join('guru', 'guru.id = mapel.guru_id')
-			->like('id', $key)
-			->or_like('nama_mapel', $key)
-			->or_like('nama_guru', $key);
+			->like('nama_mapel', $key)
+			->or_like('guru.nama', $key);
 		return $this->db->get()->result_array();
 	}
 

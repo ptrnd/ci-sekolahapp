@@ -17,6 +17,25 @@
             Data Guru
         </h3>
     </div><!-- /.card-header -->
+    <div class="row my-3 ml-2">
+        <div class="col-lg-4">
+            <form action="" method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="key" id="key" placeholder="Cari Data Guru">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <?php if (empty($guru)) : ?>
+        <div class="alert alert-danger" role="alert">
+            <strong>maaf.. pencarian tidak ditemukan :( </strong>
+        </div>
+        <?php endif; ?>
+    </div>
     <div class="card-body p-0">
         <table class="table table-striped">
             <thead>

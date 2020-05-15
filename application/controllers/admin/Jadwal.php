@@ -19,6 +19,9 @@ class Jadwal extends CI_Controller
 	{
 		$data['title'] = 'Data Jadwal';
 		$data['jadwal'] = $this->jadwal->getAll();
+		if ($this->input->post('key')) {
+			$data['jadwal'] = $this->jadwal->cariDataAll();
+		}
 		$this->load->view('template/header', $data);
 		$this->load->view('admin/jadwal/index', $data);
 		$this->load->view('template/footer');

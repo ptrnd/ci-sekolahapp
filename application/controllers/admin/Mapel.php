@@ -19,6 +19,9 @@ class Mapel extends CI_Controller
 	{
 		$data['title'] = 'Data Mata Pelajaran';
 		$data['mapel'] = $this->mapel->getAll();
+		if ($this->input->post('key')) {
+			$data['mapel'] = $this->mapel->cariDataAll();
+		}
 		$this->load->view('template/header', $data);
 		$this->load->view('admin/mapel/index', $data);
 		$this->load->view('template/footer');
