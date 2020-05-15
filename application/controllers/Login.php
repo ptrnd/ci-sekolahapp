@@ -33,8 +33,8 @@ class Login extends CI_Controller
 			&& password_verify($this->input->post('pass'), $row['password'])
 		) {
 			// // echo "ke if ceklogin";
-			$this->session->set_userdata('nama', $row->nama);
-			$this->session->set_userdata('email', $row->email);
+			$this->session->set_userdata('nama', $row['nama']);
+			$this->session->set_userdata('email', $row['email']);
 			redirect('admin/guru/index');
 		} else {
 			$data['pesan'] = "email dan/atau password anda salah. :(";

@@ -12,6 +12,9 @@ class Guru extends CI_Controller
 		$this->load->model('guru_model', 'guru');
 		$this->load->helper('url', 'form');
 		$this->load->library('form_validation', 'session');
+		if (empty($this->session->userdata('email'))) {
+			redirect('login', 'refresh');
+		}
 	}
 
 	public function index()
